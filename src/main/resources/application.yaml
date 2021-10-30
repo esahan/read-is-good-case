@@ -1,0 +1,44 @@
+server:
+  port : 8080
+  logging:
+    level:
+      org.springframework.web: DEBUG
+      org.springframework.security: DEBUG
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: default
+  data:
+    mongodb:
+      uri: mongodb://localhost:30001/ReadingIsGood
+#      uri: mongodb://localhost:27001/ReadingIsGood
+      auto-index-creation: true
+server:
+  host: localhost:8080
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  data:
+    mongodb:
+#      uri: mongodb://getir-mongodb:27001/ReadingIsGood
+#      uri: mongodb://mongo1:27017/ReadingIsGood
+      uri: mongodb://mongo:27017/ReadingIsGood
+      auto-index-creation: true
+server:
+  host: localhost:8080
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+server:
+  host: readingisgood.com
