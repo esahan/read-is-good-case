@@ -5,7 +5,6 @@ import com.ege.readingisgood.web.model.CustomerDTO;
 import com.ege.readingisgood.web.model.OrderPagedList;
 import com.ege.readingisgood.web.model.ResponseModel;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
@@ -27,7 +26,6 @@ import static com.ege.readingisgood.web.model.ResponseModel.ResponseMessages.SUC
 @RequiredArgsConstructor
 public class CustomerController {
 
-    private final Environment env;
     private final CustomerService customerService;
 
     @PostMapping("/customer")

@@ -5,7 +5,6 @@ import com.ege.readingisgood.web.model.BookDTO;
 import com.ege.readingisgood.web.model.BookPagedList;
 import com.ege.readingisgood.web.model.ResponseModel;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
@@ -26,7 +25,6 @@ import static com.ege.readingisgood.web.model.ResponseModel.ResponseMessages.*;
 @RequiredArgsConstructor
 public class BookController {
 
-    private final Environment env;
     private final BookService bookService;
 
     @PostMapping("/book")
