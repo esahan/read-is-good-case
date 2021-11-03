@@ -15,14 +15,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
-import java.net.URI;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.ege.readingisgood.web.model.ResponseModel.ResponseMessages.*;
+import static com.ege.readingisgood.web.model.ResponseModel.ResponseMessages.CREATED_SUCCESSFULLY;
+import static com.ege.readingisgood.web.model.ResponseModel.ResponseMessages.SUCCESSFUL_OPERATION;
 
 @RestController
 @RequestMapping("/api/v1/orders")
@@ -35,11 +36,10 @@ public class OrderController {
     private final MessageSource messageSource;
 
     @PostMapping("/order")
-    public ResponseEntity<ResponseModel<Object>> createOrder(@Valid @RequestBody OrderDTO order) {
+    public ResponseEntity<ResponseModel<Object>> createOrder(@Valid @RequestBody OrderDTO order, UriComponentsBuilder ucBuilder) {
         Long orderId = orderService.createOrder(order);
         HttpHeaders httpHeaders = new HttpHeaders();
-        String url = env.getProperty("server.host") + "/api/v1/orders/order/" + orderId;
-        httpHeaders.setLocation(URI.create(url));
+        httpHeaders.setLocation(ucBuilder.path("/api/v1/orders/order/{id}").buildAndExpand(orderId).toUri());
         return ResponseModel.buildResponseModel(null,HttpStatus.CREATED,httpHeaders,CREATED_SUCCESSFULLY.getMessage());
     }
 

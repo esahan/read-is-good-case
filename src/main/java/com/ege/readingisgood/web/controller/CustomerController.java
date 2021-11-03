@@ -13,15 +13,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
-import java.net.URI;
 
-import static com.ege.readingisgood.web.model.ResponseModel.ResponseMessages.*;
+import static com.ege.readingisgood.web.model.ResponseModel.ResponseMessages.CREATED_SUCCESSFULLY;
+import static com.ege.readingisgood.web.model.ResponseModel.ResponseMessages.SUCCESSFUL_OPERATION;
 
 @RestController
-@RequestMapping("api/v1/customers")
+@RequestMapping("/api/v1/customers")
 @Validated
 @RequiredArgsConstructor
 public class CustomerController {
@@ -30,11 +31,10 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping("/customer")
-    public ResponseEntity<ResponseModel<Object>> createCustomer(@Valid @RequestBody CustomerDTO customer) {
+    public ResponseEntity<ResponseModel<Object>> createCustomer(@Valid @RequestBody CustomerDTO customer, UriComponentsBuilder ucBuilder) {
         Long customerId = customerService.createCustomer(customer);
         HttpHeaders httpHeaders = new HttpHeaders();
-        String url = env.getProperty("server.host") + "/api/v1/customers/customer/" + customerId;
-        httpHeaders.setLocation(URI.create(url));
+        httpHeaders.setLocation(ucBuilder.path("api/v1/customers/customer/{id}").buildAndExpand(customerId).toUri());
         return ResponseModel.buildResponseModel(null,HttpStatus.CREATED,httpHeaders, CREATED_SUCCESSFULLY.getMessage());
     }
 

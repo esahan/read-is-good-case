@@ -13,10 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
-import java.net.URI;
 
 import static com.ege.readingisgood.web.model.ResponseModel.ResponseMessages.*;
 
@@ -30,11 +30,10 @@ public class BookController {
     private final BookService bookService;
 
     @PostMapping("/book")
-    public ResponseEntity<ResponseModel<Object>> createBook(@Valid @RequestBody BookDTO book) {
+    public ResponseEntity<ResponseModel<Object>> createBook(@Valid @RequestBody BookDTO book, UriComponentsBuilder ucBuilder) {
         Long bookId = bookService.createBook(book);
         HttpHeaders httpHeaders = new HttpHeaders();
-        String url = env.getProperty("server.host") + "/api/v1/books/book/" + bookId;
-        httpHeaders.setLocation(URI.create(url));
+        httpHeaders.setLocation(ucBuilder.path("/api/v1/books/book/{id}").buildAndExpand(bookId).toUri());
         return ResponseModel.buildResponseModel(null,HttpStatus.CREATED,httpHeaders,CREATED_SUCCESSFULLY.getMessage());
     }
 
