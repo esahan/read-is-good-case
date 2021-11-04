@@ -5,6 +5,10 @@ server:
       org.springframework.web: DEBUG
       org.springframework.security: DEBUG
 
+readisgood:
+  app:
+    jwtSecret: egeSecret
+    jwtExpirationMs: 86400000
 ---
 
 spring:

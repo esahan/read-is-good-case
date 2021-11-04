@@ -24,11 +24,12 @@ public class BusinessException extends RuntimeException{
     @AllArgsConstructor
     public enum ServiceException {
 
-        CUSTOMER_NOT_FOUND("service.exception.customer.not.found",HttpStatus.BAD_REQUEST),
+        USER_NOT_FOUND("service.exception.user.not.found",HttpStatus.BAD_REQUEST),
         BOOK_NOT_FOUND("service.exception.book.not.found", HttpStatus.BAD_REQUEST),
         ORDER_NOT_FOUND("service.exception.order.not.found",HttpStatus.BAD_REQUEST),
         BOOK_QUANTITY_ON_HAND_BELOW_ZERO("service.exception.book.quantity.on.hand.below.zero",HttpStatus.BAD_REQUEST),
-        ALL_BOOKS_NOT_EXIST("service.exception.book.all.books.not.exist", HttpStatus.BAD_REQUEST);
+        ALL_BOOKS_NOT_EXIST("service.exception.book.all.books.not.exist", HttpStatus.BAD_REQUEST),
+        REGISTER_USER_PRIVILEGE("service.exception.user.unauthorized.user",HttpStatus.UNAUTHORIZED);
 
         private String key;
         private HttpStatus status;

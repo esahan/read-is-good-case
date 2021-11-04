@@ -5,6 +5,7 @@ import com.ege.readingisgood.exceptions.ErrorMessage;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -53,6 +54,12 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({BusinessException.class})
     public ResponseEntity<Object> handleBusinessException(final BusinessException ex) {
         final ErrorMessage errorMessage = new ErrorMessage(ex.getStatus(), ex.getClass().getSimpleName(), List.of(ex.getMessage()));
+        return new ResponseEntity<>(errorMessage, new HttpHeaders(), errorMessage.getStatus());
+    }
+
+    @ExceptionHandler({AccessDeniedException.class})
+    public ResponseEntity<Object> handleAccessDeniedException(final AccessDeniedException ex) {
+        final ErrorMessage errorMessage = new ErrorMessage(HttpStatus.UNAUTHORIZED, ex.getClass().getSimpleName(), List.of(ex.getMessage()));
         return new ResponseEntity<>(errorMessage, new HttpHeaders(), errorMessage.getStatus());
     }
 
