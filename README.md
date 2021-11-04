@@ -51,3 +51,15 @@ services:
     ports:
       - "8080:8080"
 ```
+## Default Users
+
+user : admin@readisgood.com
+
+pwd  : 12345
+
+generated with "ROLE_ADMIN" via command line runner if it is not already exists in db
+
+
+## API Documentation 
+
+Swagger V2 : <host>:<port>/swagger-ui
