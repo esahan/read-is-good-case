@@ -24,7 +24,7 @@ docker build -t read-is-good .
 
 ## docker-compose-yml for development purpose
 
-```python
+```bash
 version: '3'
 services:
   mongo:
@@ -62,4 +62,6 @@ generated with "ROLE_ADMIN" via command line runner if it is not already exists 
 
 ## API Documentation 
 
+```bash
 Swagger V2 : <host>:<port>/swagger-ui
+```
