@@ -20,7 +20,8 @@ public class ResponseModel<T> {
     @Getter
     public enum ResponseMessages{
         CREATED_SUCCESSFULLY("Data Created Successfully"),
-        UPDATED_SUCCESSFULLY("Data Created Successfully"),
+        ORDER_CREATED("Order Created Successfully"),
+        UPDATED_SUCCESSFULLY("Data Updated Successfully"),
         SUCCESSFUL_OPERATION("Operation Completed Successfully");
         private String message;
     }

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -21,7 +20,8 @@ public class OrderDTO {
     @Null
     private Long id;
 
-    @NotNull(message = "{validation.order.customerId.notNull}")
+    @Null
+    //@NotNull(message = "{validation.order.customerId.notNull}")
     private Long customerId;
 
     @NotEmpty(message = "{validation.order.bookOrder.notEmpty}")
